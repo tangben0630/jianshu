@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import Btn, { btnSize, btnType, aaa } from './components/Btn'
+import Hoader from './components/header'
+import Nav from './components/nav'
+import List from './components/list'
+import Login from './components/login'
+import './index.less'
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Hoader title={'简书'} con={'创作你的创作'} btn={'登陆'}></Hoader>
+      <Nav title={'热门专题'} />
+      <List />
+      <Login />
     </div>
   );
 }

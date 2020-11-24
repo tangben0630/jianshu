@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>观察者模式</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    class Observe {
+      constructor() {
+        this.cabs = {}
+      }
+      on(name, fn) {
+        if (!this.cabs[name]) {
+          this.cabs[name] = []
+          this.cabs[name].push(fn)
+        }
+      }
+      off(name) {
+        // this.cabs = this.cabs.filter(el => el !== fn)
+        if (this.cabs[name]) {
+          this.cabs[name] = null
+        }
+      }
+      emit(name, arg) {
+        const arr = this.cabs[name]
+        if (arr) {
+          arr.forEach(element => {
+            element.call(this, arg)
+          });
+        }
+      }
+    }
+
+    //就是 on先绑定事件， emit 触发事件，off 解绑    说实话简单
+
+    const app = new Observe()
+    app.on('click', () => {
+      console.log("这是绑定的click事件");
+    })
+    app.on('down', () => {
+      console.log("这是绑定的down事件");
+    })
+
+
+    setTimeout(() => {
+      app.emit('click', 123)
+    }, 3000);
+
+
+  </script>
+</body>
+
+</html>
