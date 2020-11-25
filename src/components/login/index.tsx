@@ -1,5 +1,6 @@
 import React from 'react'
 import store from '../../store'
+import {Link} from 'react-router-dom'
 import './index.less'
 
 interface Props {
@@ -22,7 +23,7 @@ class Login extends React.Component {
   change() {
     const action = {
       type: 'add',
-      value: this.state.aaa++
+      value: this.state
     }
     store.dispatch(action)
     console.log(store.getState().age, 'jjj');
@@ -31,17 +32,26 @@ class Login extends React.Component {
     })
   }
 
+  back() {
+    console.log(this.props, '=====');
+  }
+
 
   render() {
     console.log('render');
+
     return (
       <div className="aa" onClick={() => {
         this.change()
       }}>
+        <div className="back" onClick={() => { this.back() }}>
+          
+          <Link to={'/index'}>返回</Link>
+          </div>
         <div className="l-wrap">
 
           <input type="text" placeholder="请输入号码" />
-          <input type="text" placeholder={this.state.age} />
+          <input type="text" />
           <div className="l-btn">登陆</div>
         </div>
       </div>
