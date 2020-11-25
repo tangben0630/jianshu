@@ -3,9 +3,10 @@ import Hoader from './components/header'
 import Nav from './components/nav'
 import List from './components/list'
 import Login from './components/login'
+import Detail from './components/detail/detail'
 import './index.less'
 
-import { Switch, BrowserRouter, Route, Link } from 'react-router-dom'
+import { Switch, BrowserRouter, Route, Link, Router } from 'react-router-dom'
 
 
 
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route path={'/login'}>
           <Login />
+        </Route>
+        <Route path={'/detail'}>
+          <Detail title={''}></Detail>
         </Route>
 
       </Switch>

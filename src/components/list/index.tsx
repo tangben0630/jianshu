@@ -1,5 +1,6 @@
 import React from 'react';
 import Sign from './sign'
+import { useHistory } from 'react-router-dom'
 import './index.less'
 
 const List: React.FC = (props: any): any => {
@@ -57,8 +58,12 @@ const List: React.FC = (props: any): any => {
       f: 43
     },
   ]
+  const history = useHistory()
+  function jump() {
+    history.push('/detail')
+  }
   const listItem = listData.map((item, i) => (
-    <div className="list-i" key={i} >
+    <div className="list-i" key={i} onClick={() => { jump() }}>
       <h3>{item.t}</h3>
       <p className="con">{item.c}</p>
       <div className="bot">
