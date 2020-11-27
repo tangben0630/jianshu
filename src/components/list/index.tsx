@@ -2,6 +2,8 @@ import React from 'react';
 import Sign from './sign'
 import { useHistory } from 'react-router-dom'
 import './index.less'
+import store from '../../store';
+import { set } from '../../store/action'
 
 const List: React.FC = (props: any): any => {
   const listData = [
@@ -62,10 +64,14 @@ const List: React.FC = (props: any): any => {
   function jump() {
     history.push('/detail')
   }
+  function setName() {
+    const action = set('赤木')
+    store.dispatch(action)
+  }
   const listItem = listData.map((item, i) => (
-    <div className="list-i" key={i} onClick={() => { jump() }}>
-      <h3>{item.t}</h3>
-      <p className="con">{item.c}</p>
+    <div className="list-i" key={i}>
+      <h3 onClick={() => { jump() }}>{item.t}</h3>
+      <p className="con" onClick={() => { setName() }}>{item.c}</p>
       <div className="bot">
         {/* {item.p} */}
         <Sign item={item} />

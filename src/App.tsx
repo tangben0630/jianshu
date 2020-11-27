@@ -6,7 +6,7 @@ import Login from './components/login'
 import Detail from './components/detail/detail'
 import './index.less'
 
-import { Switch, BrowserRouter, Route, Link, Router } from 'react-router-dom'
+import { Switch, BrowserRouter, Route } from 'react-router-dom'
 
 
 

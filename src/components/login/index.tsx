@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './index.less'
 
 interface Props {
@@ -26,9 +26,9 @@ class Login extends React.Component {
       value: this.state
     }
     store.dispatch(action)
-    console.log(store.getState().age, 'jjj');
+    console.log(store.getState(), 'jjj');
     this.setState({
-      age: store.getState().age
+      age: store.getState()
     })
   }
 
@@ -45,9 +45,9 @@ class Login extends React.Component {
         this.change()
       }}>
         <div className="back" onClick={() => { this.back() }}>
-          
+
           <Link to={'/index'}>返回</Link>
-          </div>
+        </div>
         <div className="l-wrap">
 
           <input type="text" placeholder="请输入号码" />

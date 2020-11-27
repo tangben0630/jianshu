@@ -3,7 +3,6 @@ interface Iprops {
   item: object
 }
 const Sign: React.FC<Iprops> = (props: any): JSX.Element => {
-  console.log(props, '----');
 
   return (
     <div className='sign'>

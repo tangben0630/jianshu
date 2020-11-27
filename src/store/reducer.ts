@@ -16,23 +16,29 @@
 // }
 
 // export const a = 1
-import { set, del } from './action'
 import { SET, DEL } from './action/actionType'
 const _state = {
   name: '樱木花道',
   age: 16
 }
 
-interface Action {
-  v?: string;
-  type: string
-}
+// interface Action {
+//   v?: string;
+//   type?: string
+// }
 
-function fn(state = _state, action: Action) {
+export const fn = function (state: object = _state, action: object) {
   const newState: object = { ...state }
   switch ((action as any).type) {
     case SET:
-      (newState as any).name = action.v
+
+      (newState as any).name = (action as any).v
+
+      console.log('--set----这个set函数，为什么没执行？', newState);
+      return newState
+
+    case DEL:
+      (newState as any).age = (action as any).v
       return newState
 
     default:
@@ -41,23 +47,4 @@ function fn(state = _state, action: Action) {
 
 }
 
-export default fn
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// export default f
