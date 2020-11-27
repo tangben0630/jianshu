@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
+import Aaa from './aaa'
 import store from '../../store'
 import './index.less'
 interface Props {
@@ -22,6 +23,7 @@ const Hoader: React.FC<Props> = (props: Props): JSX.Element => {
     <div className="header">
       <div className="left">{props.title}</div>
       <div className="mid">{name.name}</div>
+      <Aaa />
       <div className="btn" onClick={() => { aaa() }}>
         <span>{props.btn}</span>
       </div>
