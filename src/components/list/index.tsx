@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import './index.less'
 import store from '../../store';
 import { set } from '../../store/action'
+import { useSelector, useDispatch } from 'react-redux'
 
 const List: React.FC = (props: any): any => {
   const listData = [
