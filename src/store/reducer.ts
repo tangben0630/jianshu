@@ -18,7 +18,7 @@
 // export const a = 1
 import { SET, DEL } from './action/actionType'
 const _state = {
-  name: '樱木花道',
+  name: '创作你的创作',
   age: 16
 }
 

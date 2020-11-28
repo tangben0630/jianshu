@@ -8,29 +8,31 @@ interface Props {
   con: string;
   btn: string;
 }
-const unsubscribe = store.subscribe(() =>
-  console.log(store.getState(), '============999===')
-)
 
 const Hoader: React.FC<Props> = (props: Props): JSX.Element => {
-  const name: any = store.getState()
+  let name: any = store.getState()
+  const unsubscribe = store.subscribe(nihao)
   console.log(name, 'name');
   let his = useHistory()
-  function aaa() {
+  function jump() {
     his.push('/login')
   }
+  function nihao() {
+    console.log('你好，你什么时候会运行？？？');
+
+  }
+  unsubscribe()
   return (
     <div className="header">
       <div className="left">{props.title}</div>
       <div className="mid">{name.name}</div>
-      <Aaa />
-      <div className="btn" onClick={() => { aaa() }}>
+      <div className="btn" onClick={() => { jump() }}>
         <span>{props.btn}</span>
       </div>
     </div>
   )
 }
-unsubscribe()
+
 
 
 
