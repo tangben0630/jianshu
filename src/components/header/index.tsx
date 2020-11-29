@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import Aaa from './aaa'
+import { useSelector } from 'react-redux'
+// import Aaa from './aaa'
 import store from '../../store'
 import './index.less'
 interface Props {
@@ -10,9 +11,8 @@ interface Props {
 }
 
 const Hoader: React.FC<Props> = (props: Props): JSX.Element => {
-  let name: any = store.getState()
+  const name: any = useSelector(state => state)
   const unsubscribe = store.subscribe(nihao)
-  console.log(name, 'name');
   let his = useHistory()
   function jump() {
     his.push('/login')
