@@ -1,21 +1,4 @@
-// //这个文件  才是真正管理数据跟逻辑的
-// const defaultValue: any = {
-//   name: 'yangshuyu',
-//   age: 6
-// }
-// // eslint-disable-next-line import/no-anonymous-default-export
-// export default (state: any = defaultValue, action: any) => {
-//   // reducer,可以寄接收state，但是不能修改它
-//   const newState = JSON.parse(JSON.stringify(state))
-//   const type = action.type
-//   if (type === 'add') {
-//     newState.age = action.value
-//     return newState
-//   }
-//   return state
-// }
 
-// export const a = 1
 import { SET, DEL } from './action/actionType'
 const _state = {
   name: '创作你的创作',
@@ -31,7 +14,7 @@ export const fn = function (state: object = _state, action: object) {
   const newState: object = { ...state }
   switch ((action as any).type) {
     case SET:
-
+      console.log('r--22222');
       (newState as any).name = (action as any).v
 
       console.log('--set----这个set函数，为什么没执行？', newState);

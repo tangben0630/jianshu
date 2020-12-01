@@ -5,7 +5,7 @@ import List from './components/list'
 import Login from './components/login'
 import Detail from './components/detail/detail'
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
-import { useSelector, useDispatch, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 import store from './store'
 import './index.less'
 
