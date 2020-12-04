@@ -82,50 +82,71 @@
     }
 
 
+    // Function.prototype._bind = function(){
+    //   const me = this //保留原来的函数的 this
+    //   const params = [].slice.call(arguments)
+    //   let target = params[0]
+    //   let args = params.slice(1)
+    //   const bindFn = function(){
+    //     this.a = 6
+    //     args = args.concat([].slice.call(arguments))
+    //     if(this instanceof bindFn){
+    //       target = this
+    //     }
+    //     return me.apply(target, args)
+    //   }
+    //   if(me.prototype){
+    //     bindFn.prototype = Object.create(me.prototype)
+    //   }
+    //   return bindFn
+    // }
+
+
+
+
+
     Function.prototype._bind = function(){
-      const me = this //保留原来的函数的 this
+      const me = this
       const params = [].slice.call(arguments)
       let target = params[0]
       let args = params.slice(1)
-      const bindFn = function(){
-        this.a = 6
+      const fn = function(){
         args = args.concat([].slice.call(arguments))
-        if(this instanceof bindFn){
+        if(this instanceof fn){
           target = this
         }
         return me.apply(target, args)
       }
-      if(me.prototype){
-        bindFn.prototype = Object.create(me.prototype)
-      }
-      return bindFn
+      fn.prototype = Object.create(me.prototype)
+      return fn
     }
 
     const bind = aaa._bind(obj, 2)
-    const bb = new bind()
-    console.log(bb);
+    bind(3)
+    // const bb = new bind()
+    // console.log(bb);
     
     //函数组合  每个函数执行后的输出，作为下一个函数的的参数
     
     //当前函数运行，需要依赖参数的运行结果，
 
-    function curry(fn, arr){
-      let args = arr || []
-      const len = fn.length
-      return function(){
-        let args2 = [].slice.call(arguments)
-        args2 = args.concat(args2)
-        if(len > args2.length){
-          return curry.call(null,fn, args2)
-        }else {
-          return fn.apply(null, args2)
-        }
-      }
-    }
+    // function curry(fn, arr){
+    //   let args = arr || []
+    //   const len = fn.length
+    //   return function(){
+    //     let args2 = [].slice.call(arguments)
+    //     args2 = args.concat(args2)
+    //     if(len > args2.length){
+    //       return curry.call(null,fn, args2)
+    //     }else {
+    //       return fn.apply(null, args2)
+    //     }
+    //   }
+    // }
 
-    const a = curry(add)
-    console.log(a(1,2)(3),'+++');
-    console.log(a(1,2)(3),'+++');
+    // const a = curry(add)
+    // console.log(a(1,2)(3),'+++');
+    // console.log(a(1,2)(3),'+++');
 
   
 
