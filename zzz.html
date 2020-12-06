@@ -81,30 +81,6 @@
       console.log(this.a*x,'222');
     }
 
-
-    // Function.prototype._bind = function(){
-    //   const me = this //保留原来的函数的 this
-    //   const params = [].slice.call(arguments)
-    //   let target = params[0]
-    //   let args = params.slice(1)
-    //   const bindFn = function(){
-    //     this.a = 6
-    //     args = args.concat([].slice.call(arguments))
-    //     if(this instanceof bindFn){
-    //       target = this
-    //     }
-    //     return me.apply(target, args)
-    //   }
-    //   if(me.prototype){
-    //     bindFn.prototype = Object.create(me.prototype)
-    //   }
-    //   return bindFn
-    // }
-
-
-
-
-
     Function.prototype._bind = function(){
       const me = this
       const params = [].slice.call(arguments)
@@ -121,8 +97,8 @@
       return fn
     }
 
-    const bind = aaa._bind(obj, 2)
-    bind(3)
+    // const bind = aaa._bind(obj, 2)
+    // bind(3)
     // const bb = new bind()
     // console.log(bb);
     
@@ -130,23 +106,97 @@
     
     //当前函数运行，需要依赖参数的运行结果，
 
-    // function curry(fn, arr){
-    //   let args = arr || []
-    //   const len = fn.length
+
+    function reverse(arr){
+      return arr.reverse()
+    }
+    function first(arr){
+      return arr[0]
+    }
+
+    function com(...arg){//重点是保证函数从右到左执行
+      arg = arg.reverse()
+      return function(v){
+        return arg.reduce((a, b)=>{
+          return b(a)
+        },v)
+      }
+    }
+
+    function toU(s){
+      return s.toUpperCase()
+    }
+
+    const fnn = com(toU, first, reverse)
+
+    Function.prototype._bind = function(){
+      const me = this
+      const params = [].slice.call(arguments)
+      let target = params[0]
+      let args = params.slice(1)
+      function bind(){
+        args = args.concat([].slice.call(arguments))
+        if(this instanceof bind){
+          target = this
+        }
+        return me.apply(target, args)
+      }
+      if(this.prototype){
+        bind.prototype = Object.create(this.prototype)
+      }
+      return bind
+    }
+    const bindObj = {
+      a:2
+    }
+    function ffn(n){
+      console.log(this.a*n,'++++');
+    }
+
+    const bbn = ffn._bind(bindObj,5)
+    const bn = new bbn()
+    console.log(bn);
+
+    // function cn(){
+    //   const params = [].slice.call(arguments)
+    //   console.log(params,'params');
+    //   let fn = params[0]
+    //   let len = fn.length
+    //   let args = params.slice(1)
+    //   console.log(args,'-----------');
     //   return function(){
     //     let args2 = [].slice.call(arguments)
+    //     console.log(args2,'+++++++++++++');
     //     args2 = args.concat(args2)
-    //     if(len > args2.length){
-    //       return curry.call(null,fn, args2)
-    //     }else {
-    //       return fn.apply(null, args2)
+    //     if(len > args.length){
+    //       return cn.call(null, fn, args2)
     //     }
+    //     return fn.apply(null, args2)
     //   }
     // }
 
-    // const a = curry(add)
-    // console.log(a(1,2)(3),'+++');
-    // console.log(a(1,2)(3),'+++');
+    function cn(fn, arr){
+      const len = fn.length
+      const args = arr || []
+      return function(){
+        const args2 = args.concat([].slice.call(arguments))
+        if(len > args2.length){
+          return cn.call(null, fn,args2)
+        }else {
+          return fn.apply(null, args2)
+        }
+
+      }
+    }
+
+    function add3 (a, b, c){
+      return a+b+c
+    }
+    const addf = cn(add3)
+    console.log(addf(1)(2)(3));
+    console.log(addf(1)(2)(3));
+    
+
 
   
 
