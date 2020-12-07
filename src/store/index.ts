@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { fn } from './reducer'
 import thunk from 'redux-thunk'
 console.log(thunk, 'thunk');
