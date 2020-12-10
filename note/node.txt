@@ -1,0 +1,40 @@
+libuv:
+  1，libuv辅助js进行调度
+  2，libuv对系统的异步i/o进行了封装
+  3，application，调用的都是v8里面的引擎，
+  4，引擎通过绑定nodejs，绑定到操作系统上面
+  5，然后进入到libuv控制的事件队列
+  6，libuv单独开个进程辅助js调度，对windows linux事件调度的通知
+  7，libuv封装的是操作系统的底层
+  8，libuv通过事件循环，把每一个事件送出去执行
+
+  二：
+  1，进入libuv，线注册到回调函数里面
+    a，settimeout，settimeinterval 线程池不参与
+    b，process.nextTrick()，每次调用放入队列中，
+        下一轮循环中取出
+    c，settimediate 比 process.nextTrick 优先级低
+    d，node实现一个sleep ？
+
+  观察者：
+    1，观察者负责将事件分类
+    2，idle观察者，process nexttick（）
+        效率最高，消耗资源少，但是会阻塞cpu的后续调度
+    3，io观察者 settimeout
+        精确度不高，可能会延迟执行，启用了红黑树，消耗大
+    4，check观察者 setmmediate
+        消耗的资源小，不会造成阻塞，效率低
+
+    5，idle > Promise > io > check
+    6,微任务：process.nextTick, promise, Object.observe,
+      MutationObserver
+
+    7，事件循环的阶段：
+      1, update_time
+      2, timers
+      3, io callback
+      4, idle prepare
+      5, check
+      6, close callback
+
+      4, 6, 3, 5, 1, 2

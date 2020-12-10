@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 // import Aaa from './aaa'
+import axios from 'axios'
 import store from '../../store'
 import './index.less'
 interface Props {
@@ -12,6 +13,10 @@ interface Props {
 
 const Hoader: React.FC<Props> = (props: Props): JSX.Element => {
   const name: any = useSelector(state => state)
+  axios.get('/api/nihao/aaa').then(res => {
+    console.log(res, 'res');
+
+  })
   const unsubscribe = store.subscribe(nihao)
   let his = useHistory()
   function jump() {
