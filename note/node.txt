@@ -18,7 +18,7 @@ libuv:
 
   观察者：
     1，观察者负责将事件分类
-    2，idle观察者，process nexttick（）
+    2，idle观察者，process nexttick()
         效率最高，消耗资源少，但是会阻塞cpu的后续调度
     3，io观察者 settimeout
         精确度不高，可能会延迟执行，启用了红黑树，消耗大
