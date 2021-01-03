@@ -34,3 +34,35 @@
     b，服务器接收到一个SYN包后，把该包放入SYN队列中，回送一个SYN/ACK。 ACK的确认码为A+1
       SYN/ACK 包本身携带一个随机的序号为B
     c，客户端收到这个SYN/ACK包后，发送一个ACK的包，
+
+ajax post发送请求的时候，
+
+  multipart/form-data
+  application/json
+  application/x-www-form-urlencoded
+
+  EncType: 规定在发送服务器之前应该如何对表单数据进行编码
+
+  application/x-www-from-urlencoded：
+
+    默认的格式是 application/x-www-from-urlencoded，在发送
+    服务器之前，所有字符都会被编码
+    窗体数据被编码为 名称/值对
+    比如：
+      'id=3'
+      Form data 显示为
+        id:3
+  
+  application/json：
+
+    发送json格式的字符串
+    比如：
+      "{'id':'3'}"
+    Request Payload 显示为：
+      {id:3}
+  
+
+  Content-Type是指http/https发送信息至服务器时的内容编码类型
+    ontentType用于表明发送数据流的类型，服务器根据编码类型使用特定的
+    解析方式，获取数据流中的数据。
+    
