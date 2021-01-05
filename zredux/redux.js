@@ -1,4 +1,4 @@
-import { createStore } from './createStore'
+import { createStore } from './createStore.js'
 let initState = {
 	counter:{
 		count:0
@@ -9,6 +9,7 @@ let initState = {
 	}
 }
 
+console.log(909)
 let store = createStore(initState)
 
 store.subscribe(()=>{

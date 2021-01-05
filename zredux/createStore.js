@@ -7,7 +7,13 @@ export default function createStore(initState){
   function getState(){
     return state
   }
+	function changeState(newState){
+		listeners.forEach(el=>{
+			el()
+		})
+	}
   return {
-    subscribe
+    subscribe,
+		getState
   }
 }
