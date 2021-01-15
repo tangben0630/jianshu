@@ -22,41 +22,41 @@
 二，新版本：
 
   创建时：
-    constructor:
+    1，constructor:
 
       在react组件挂载之前，会调用他的构造函数，
       在为 React.Component 子类实现构造函数时，应在其他语句之前前调用 super(props)
 
-    getDerivedStateFromProps
+    2，getDerivedStateFromProps
 
       会在render之前调用，并且在初始挂载及后续更新时都会调用，它应该返回一个对象来更新state，
       如果返回null，则不更新任何内容
 
-    render
+    3，render
 
       render被调用时，他会检查this.props和this.state的变化返回类型：
         react元素，
       如果 shouldComponentUpdate() 返回 false，则不会调用 render()
 
-    componentDidMount
+    4，componentDidMount
 
       组件挂载后（插入 DOM 树中）立即调用
       如果添加了订阅，请不要忘记在 componentWillUnmount() 里取消订阅
 
   更新时：
-    getDerivedStateFromProps
-    shouldComponentUpdate
+    1，getDerivedStateFromProps
+    2，shouldComponentUpdate
 
       根据 shouldComponentUpdate() 的返回值，判断 React 组件的输出是否受当前 
       state 或 props 更改的影响
 
-    render
-    getSnapshotBeforeUpdate
+    3，render
+    4，getSnapshotBeforeUpdate
       在最近一次渲染输出（提交到 DOM 节点）之前调用
       它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。
       此生命周期的任何返回值将作为参数传递给 componentDidUpdate()。
 
-    componentDidUpdate
+    5，componentDidUpdate
       会在更新后会被立即调用。首次渲染不会执行此方法。
 
   销毁：
