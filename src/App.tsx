@@ -1,13 +1,9 @@
 import React from 'react';
-import Test from './components/class/Class'
-
-
+import Hello from './components/Hello'
 
 function App() {
   return <>
-    <div>
-      <Test />
-    </div>
+    <Hello></Hello>
   </>
 
 
