@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Cont from './components/Context'
+import Cont, { dataContext } from './components/Context'
 
 
 ReactDOM.render(
