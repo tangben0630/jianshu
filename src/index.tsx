@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import 'lib-flexible'
+import Cont, { dataContext } from './components/Context'
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Cont>
     <App />
-  </React.StrictMode>,
+  </Cont>,
   document.getElementById('root')
 );
 
