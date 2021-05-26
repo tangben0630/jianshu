@@ -9,9 +9,50 @@
 
 <body>
 
+  <div id="content"
+    style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;"></div>
 
 
   <script>
+
+    var num = 1;
+    var content = document.getElementById('content');
+
+    function count() {
+      content.innerHTML = num++;
+    };
+
+
+    const de = (fn, wait, ...args) => {
+      let timer
+      return function () {
+        const ctx = this
+        if (timer) {//如果单位时间内，又执行了一次，直接清除定时器
+          clearTimeout(timer)//不让执行
+        }
+        timer = setTimeout(() => {
+          fn.apply(ctx, args)
+        }, wait)
+      }
+    }
+
+    const de2 = (fn, wait, ...args) => {//立即执行版本
+      let timer//timer为null 可以执行函数
+      return function () {
+        const ctx = this
+        if (timer) {
+          clearTimeout(timer)//不让执行
+        }
+        let can = !timer
+        timer = setTimeout(() => {
+          timer = null//目的就是让 timer = null 有了一次可以执行的机会
+        }, wait)
+        if (can) {
+          fn.apply(ctx, args)
+        }
+      }
+    }
+    content.onmousemove = de2(count, 1000);
     // class Observe {
     //   constructor() {
     //     this.cabs = {}
@@ -53,11 +94,13 @@
     //   app.emit('click', 123)
     // }, 3000);
 
-    function add(a, b, c){
-      return a+b+c
+
+
+    function add(a, b, c) {
+      return a + b + c
     }
 
-    
+
 
     //偏函数
     //它是指使用一个函数并将其应用一个或多个参数，
@@ -65,9 +108,9 @@
     //另一种解释：是指将一些参数固定到一个函数，产生另一个较小的函数的过程
 
     //arr.slice 并不会修改原来的数组，而是返回新的数组，splice会修改原来的数组
-    
-    function m(a, b){
-      return a*b
+
+    function m(a, b) {
+      return a * b
     }
     //也就是说，
 
@@ -75,20 +118,20 @@
     // console.log(double(5,3));//10
 
     const obj = {
-      a:123
+      a: 123
     }
-    function aaa(x){
-      console.log(this.a*x,'222');
+    function aaa(x) {
+      console.log(this.a * x, '222');
     }
 
-    Function.prototype._bind = function(){
+    Function.prototype._bind = function () {
       const me = this
       const params = [].slice.call(arguments)
       let target = params[0]
       let args = params.slice(1)
-      const fn = function(){
+      const fn = function () {
         args = args.concat([].slice.call(arguments))
-        if(this instanceof fn){
+        if (this instanceof fn) {
           target = this
         }
         return me.apply(target, args)
@@ -101,59 +144,59 @@
     // bind(3)
     // const bb = new bind()
     // console.log(bb);
-    
+
     //函数组合  每个函数执行后的输出，作为下一个函数的的参数
-    
+
     //当前函数运行，需要依赖参数的运行结果，
 
 
-    function reverse(arr){
+    function reverse(arr) {
       return arr.reverse()
     }
-    function first(arr){
+    function first(arr) {
       return arr[0]
     }
 
-    function com(...arg){//重点是保证函数从右到左执行
+    function com(...arg) {//重点是保证函数从右到左执行
       arg = arg.reverse()
-      return function(v){
-        return arg.reduce((a, b)=>{
+      return function (v) {
+        return arg.reduce((a, b) => {
           return b(a)
-        },v)
+        }, v)
       }
     }
 
-    function toU(s){
+    function toU(s) {
       return s.toUpperCase()
     }
 
     const fnn = com(toU, first, reverse)
 
-    Function.prototype._bind = function(){
+    Function.prototype._bind = function () {
       const me = this
       const params = [].slice.call(arguments)
       let target = params[0]
       let args = params.slice(1)
-      function bind(){
+      function bind() {
         args = args.concat([].slice.call(arguments))
-        if(this instanceof bind){
+        if (this instanceof bind) {
           target = this
         }
         return me.apply(target, args)
       }
-      if(this.prototype){
+      if (this.prototype) {
         bind.prototype = Object.create(this.prototype)
       }
       return bind
     }
     const bindObj = {
-      a:2
+      a: 2
     }
-    function ffn(n){
-      console.log(this.a*n,'++++');
+    function ffn(n) {
+      console.log(this.a * n, '++++');
     }
 
-    const bbn = ffn._bind(bindObj,5)
+    const bbn = ffn._bind(bindObj, 5)
     const bn = new bbn()
     console.log(bn);
 
@@ -175,30 +218,30 @@
     //   }
     // }
 
-    function cn(fn, arr){
+    function cn(fn, arr) {
       const len = fn.length
       const args = arr || []
-      return function(){
+      return function () {
         const args2 = args.concat([].slice.call(arguments))
-        if(len > args2.length){
-          return cn.call(null, fn,args2)
-        }else {
+        if (len > args2.length) {
+          return cn.call(null, fn, args2)
+        } else {
           return fn.apply(null, args2)
         }
 
       }
     }
 
-    function add3 (a, b, c){
-      return a+b+c
+    function add3(a, b, c) {
+      return a + b + c
     }
     const addf = cn(add3)
-    console.log(addf(1)(2)(3));
-    console.log(addf(1)(2)(3));
-    
+    // console.log(addf(1)(2)(3));
+    // console.log(addf(1)(2)(3));
 
 
-  
+
+
 
   </script>
 </body>
