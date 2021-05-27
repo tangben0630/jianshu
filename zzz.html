@@ -24,6 +24,7 @@
 
 
     const de = (fn, wait, ...args) => {
+      console.log(999);
       let timer
       return function () {
         const ctx = this
@@ -52,7 +53,40 @@
         }
       }
     }
-    content.onmousemove = de2(count, 1000);
+
+    const de3 = function (fn, wait, ...arg) {
+      console.log(000);
+      let timer
+      return function () {
+        console.log(888);
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, arg)
+        }, wait)
+      }
+    }//
+
+    const de4 = (fn, w, ...arg) => {
+      console.log('de4');
+      let timer = null
+      return function () {
+        console.log(timer, '=999=');
+        const can = !timer
+        if (timer) {
+          clearTimeout(timer)
+        }
+        console.log(timer, '=====');
+        timer = setTimeout(() => {
+          timer = null//每隔一段时间赋值为null
+        }, w)
+        if (can) {
+          fn.apply(this, arg)
+        }
+      }
+    }
+    content.onmousemove = de4(count, 1000);
     // class Observe {
     //   constructor() {
     //     this.cabs = {}
