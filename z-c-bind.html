@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+  <script>
+
+    function a(c,d){
+      console.log(this.a,'aaa', c, d,'cd');
+    }
+
+    Function.prototype._bind = function(){
+      const obj = [].slice.call(arguments)[0]
+      const arg1 = [].slice.call(arguments, 1)
+      const me = this
+      console.log(me,'_bind的fn');
+      const bind = function(){
+        const arg2 = [].slice.call(arguments)
+        const arg3 = arg1.concat(arg2)
+        console.log(this, 'this');
+        me.apply(obj, arg3)
+      }
+      return bind
+    }
+
+    // function Person(){}
+    // const p = new Person()
+    // const q = {}
+    // // console.log(p,'p');
+    // console.log(q.__proto__,'q.__proto__');
+    // console.log(p.constructor,'q.constructor');
+
+
+
+    // var c = a._bind(obj)
+    // console.log(c,'c');
+    // var cc = new c()
+    // console.log(c,'===', c(3,4));
+    // console.log(cc,'cc');
+    //新建一个对象
+    //执行当前函数
+    //this指向实例化
+    //返回这个对象
+
+    function add(a, b, c){
+      return a + b + c
+    }
+
+    function curry(fn, arr=[]){
+      const len = fn.length
+      return function(){
+        const arg1 = [].slice.call(arguments)
+        const arg2 = arr.concat(arg1)
+        const l = arg2.length
+        if(l >= len){
+          return fn.apply(null, arg2)
+        }else {
+          return curry(fn, arg2)
+        }
+      }
+    }
+
+    const c = curry(add)
+
+    const d = c(1)(2,3)
+    const f = c(1)(2,3)
+    console.log(d,'d', f);
+
+
+    
+
+
+
+
+  </script>
+</body>
+</html>

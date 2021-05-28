@@ -23,8 +23,7 @@
     };
 
 
-    const de = (fn, wait, ...args) => {
-      console.log(999);
+    const de = (fn, wait, ...args) => {//延迟执行版本
       let timer
       return function () {
         const ctx = this
@@ -86,7 +85,7 @@
         }
       }
     }
-    content.onmousemove = de4(count, 1000);
+    content.onmousemove = de(count, 2000);
     // class Observe {
     //   constructor() {
     //     this.cabs = {}
@@ -154,25 +153,25 @@
     const obj = {
       a: 123
     }
-    function aaa(x) {
-      console.log(this.a * x, '222');
-    }
+    // function aaa(x) {
+    //   console.log(this.a * x, '222');
+    // }
 
-    Function.prototype._bind = function () {
-      const me = this
-      const params = [].slice.call(arguments)
-      let target = params[0]
-      let args = params.slice(1)
-      const fn = function () {
-        args = args.concat([].slice.call(arguments))
-        if (this instanceof fn) {
-          target = this
-        }
-        return me.apply(target, args)
-      }
-      fn.prototype = Object.create(me.prototype)
-      return fn
-    }
+    // Function.prototype._bind = function () {
+    //   const me = this
+    //   const params = [].slice.call(arguments)
+    //   let target = params[0]
+    //   let args = params.slice(1)
+    //   const fn = function () {
+    //     args = args.concat([].slice.call(arguments))
+    //     if (this instanceof fn) {
+    //       target = this
+    //     }
+    //     return me.apply(target, args)
+    //   }
+    //   fn.prototype = Object.create(me.prototype)
+    //   return fn
+    // }
 
     // const bind = aaa._bind(obj, 2)
     // bind(3)
@@ -184,55 +183,55 @@
     //当前函数运行，需要依赖参数的运行结果，
 
 
-    function reverse(arr) {
-      return arr.reverse()
-    }
-    function first(arr) {
-      return arr[0]
-    }
+    // function reverse(arr) {
+    //   return arr.reverse()
+    // }
+    // function first(arr) {
+    //   return arr[0]
+    // }
 
-    function com(...arg) {//重点是保证函数从右到左执行
-      arg = arg.reverse()
-      return function (v) {
-        return arg.reduce((a, b) => {
-          return b(a)
-        }, v)
-      }
-    }
+    // function com(...arg) {//重点是保证函数从右到左执行
+    //   arg = arg.reverse()
+    //   return function (v) {
+    //     return arg.reduce((a, b) => {
+    //       return b(a)
+    //     }, v)
+    //   }
+    // }
 
-    function toU(s) {
-      return s.toUpperCase()
-    }
+    // function toU(s) {
+    //   return s.toUpperCase()
+    // }
 
-    const fnn = com(toU, first, reverse)
+    // const fnn = com(toU, first, reverse)
 
-    Function.prototype._bind = function () {
-      const me = this
-      const params = [].slice.call(arguments)
-      let target = params[0]
-      let args = params.slice(1)
-      function bind() {
-        args = args.concat([].slice.call(arguments))
-        if (this instanceof bind) {
-          target = this
-        }
-        return me.apply(target, args)
-      }
-      if (this.prototype) {
-        bind.prototype = Object.create(this.prototype)
-      }
-      return bind
-    }
-    const bindObj = {
-      a: 2
-    }
-    function ffn(n) {
-      console.log(this.a * n, '++++');
-    }
+    // Function.prototype._bind = function () {
+    //   const me = this
+    //   const params = [].slice.call(arguments)
+    //   let target = params[0]
+    //   let args = params.slice(1)
+    //   function bind() {
+    //     args = args.concat([].slice.call(arguments))
+    //     if (this instanceof bind) {
+    //       target = this
+    //     }
+    //     return me.apply(target, args)
+    //   }
+    //   if (this.prototype) {
+    //     bind.prototype = Object.create(this.prototype)
+    //   }
+    //   return bind
+    // }
+    // const bindObj = {
+    //   a: 2
+    // }
+    // function ffn(n) {
+    //   console.log(this.a * n, '++++');
+    // }
 
-    const bbn = ffn._bind(bindObj, 5)
-    const bn = new bbn()
-    console.log(bn);
+    // const bbn = ffn._bind(bindObj, 5)
+    // const bn = new bbn()
+    // console.log(bn);
 
     // function cn(){
     //   const params = [].slice.call(arguments)
