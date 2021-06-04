@@ -1,0 +1,8 @@
+
+起源:
+
+  react运行: schedule --> render --> commit
+
+  1, useeffetc 是在 commit阶段完成渲染后异步执行的
+
+  

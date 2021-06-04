@@ -10,14 +10,21 @@
   
 
   <script>
+    function bar(){// ao: a
+      console.log(a);
+      console.log(b);
+    }
 
-    // function Foo(){}
-    // const f = new Foo()
-    // const o = new Object()
+    function foo(){ // ao: a  vo: a   foo ---> a=1
+      var a = 2
+      b = 2
+      bar()
+    }
+    // bar()
+    var a = 1
 
+    foo()
 
-    
-    console.log(a);
 
 
 
