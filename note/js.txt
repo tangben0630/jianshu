@@ -13,10 +13,10 @@
   Callee Stack： 函数执行栈 里面装载了无数的执行上下文，很多的 EC ==== 简称 ECS 复数 
 
 5，AO：activation object 活动对象  函数执行的时候 会激活AO，相当于函数的内部
-
+  ES5之前：
   EC: {
     scopeChain: {
-      VO[scope]
+      scope
     },
     AO: { 内部变量 },
     VO: { 外部变量 },
@@ -26,3 +26,20 @@
 6，VO：variable object  变量对象 可以分析函数的作用域链 函数执行动态创建出来的 处理的是 函数外部的变量
 
 7， GC
+
+  新版：
+
+  EC: {
+    thisBinding: <this, value>,
+    LexicalEnvirament: { 词法环境
+      EnviramentRecord: {
+        type: 'declar',
+      }，
+      b: uninitalized
+    }，
+    outer: {外部的变量}
+    VariableEnvironment：{ 变量环境
+      存储var 的变量
+      a:underfine
+    }
+  }
