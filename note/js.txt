@@ -1,0 +1,28 @@
+1, 爆栈   内存 / （变量 * number）
+
+2，函数在压入栈内的时候 会产生作用域链， 会将不同的变量存到不同的内存中
+
+3，js执行代码的时候 首先会创建几个变量
+
+  GC golbalContext: 全局上下文，包含了全局对象  在栈底 是不会弹出去的，window的全局变量
+
+4， js执行函数的时候 会创建一个执行上下文
+
+  EC  execution context ： 执行上下文（函数）
+
+  Callee Stack： 函数执行栈 里面装载了无数的执行上下文，很多的 EC ==== 简称 ECS 复数 
+
+5，AO：activation object 活动对象  函数执行的时候 会激活AO，相当于函数的内部
+
+  EC: {
+    scopeChain: {
+      VO[scope]
+    },
+    AO: { 内部变量 },
+    VO: { 外部变量 },
+    scope: [AO, golbalContext.VO]    // scope = AO + scopeChain
+  }
+
+6，VO：variable object  变量对象 可以分析函数的作用域链 函数执行动态创建出来的 处理的是 函数外部的变量
+
+7， GC
