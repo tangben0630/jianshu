@@ -43,3 +43,30 @@
       a:underfine
     }
   }
+
+
+
+
+
+
+
+
+
+
+node: 
+
+  timers: 看看当前定时器有没有过期  到时间就执行 每个阶段切换到下一个阶段 都会执行 nextTick
+
+  pending callback:
+
+  idle, prepare: node 内部
+
+  poll: 循环这个机制,  所有 i/o 都在poll阶段执行, 有timer执行timer,没有的话执行check, 
+        每个阶段切换到下一个阶段都会执行一个 nextTick 
+
+  check: 
+
+
+
+
+
