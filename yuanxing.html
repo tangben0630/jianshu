@@ -12,34 +12,71 @@
 
 
   <script>
-
-    function feibo(n) {
-      if (n == 1) return 1
-      if (n == 2) return 1
-      return setTimeout((n) => {
-        console.log(n);
-        if (n > 2) {
-          feibo(n - 1) + feibo(n - 2)
-        }
-      })
+    
+    function bengchuang(f){
+      while (f && f instanceof Function) {
+        f = f()
+      }
+      return f
     }
-    //1 1 2 3 5
-    const a = f(7)
-    console.log(a);
 
-    function f(n) {
-      if (n == 1) return 1
-      if (n == 2) return 1
-      let a = 1, b = 1, c
-      for (let i = 2; i < n; i++) {
-        c = b + a
+    
+    function f(n){
+      if(n < 2){
+        return n 
+      }
+      return f(n-2) + f(n-1)
+    }
+    // const w = f(6)
+    // console.log(w,'w');
+    
+    function g(n, cur, next){
+      if(n==0){
+        return 0
+      }
+      if(n==1){
+        return next
+      }
+      return g.bind(null, n-1, next, cur+next)
+    }
+    // const a = g(6, 0, 1)
+    // console.log(a,'aaa');
+    const aa = bengchuang(g(6000000,0,1))
+    console.log(aa,'aa==>>');
+    
+
+    function h(n, cur=0, next=1){
+      if(n==0){
+        return n
+      }
+      if(n == 1){
+        return next
+      }
+      const c = cur+next
+      return h.bind(null, n-1, next, c)
+    }
+
+
+    function gg(n){
+      if(n<2){
+        return n
+      }
+      var a = 0, b = 1, c
+      for(let i=1;i<n;i++){
+        c = a+b
         a = b
         b = c
       }
       return c
     }
-
-
+    function bengchuang2(f){
+      while (f && f instanceof Function) {
+        f = f()
+      }
+      return f
+    }
+    // console.log(gg(18));
+    console.log(bengchuang2(h(60000)));
 
 
 
