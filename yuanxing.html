@@ -1,120 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  
+
 
   <script>
-    const maps = [
-  {
-    key: 'a1',
-    parent: 'root'
-  },
-  {
-    key: 'a2',
-    parent: 'a1'
-  },
-  {
-    key: 'a3',
-    parent: 'a1'
-  },
-  {
-    key: 'a4',
-    parent: 'a1'
-  },
-  {
-    key: 'a5',
-    parent: 'a3'
-  }
-]
 
-function TreeNode(value) {
-  this.value = value
-  this.children = []
-}
-
-function transformListToTree(maps) {
-  const root = new TreeNode('root')
-  const cacheMap = new Map()
-  cacheMap.set('root', root)
-  for (const m of maps) {
-    const { parent, key } = m
-    const newNode = new TreeNode(key)
-    if (cacheMap.has(parent)) {
-      const a = cacheMap.get(parent)
-      a.children.push(newNode)
-    } else {
-      root.children.push(newNode)
-    }
-    cacheMap.set(key, newNode)
-  }
-
-  return root
-}
-
-console.log(transformListToTree(maps))
-    function bengchuang(f){
+    function bengchuang(f) {
       while (f && f instanceof Function) {
         f = f()
       }
       return f
     }
 
-    
-    function f(n){
-      if(n < 2){
-        return n 
+
+    function f(n) {
+      if (n < 2) {
+        return n
       }
-      return f(n-2) + f(n-1)
+      return f(n - 2) + f(n - 1)
     }
     // const w = f(6)
     // console.log(w,'w');
-    
-    function g(n, cur, next){
-      if(n==0){
+
+    function g(n, cur, next) {
+      if (n == 0) {
         return 0
       }
-      if(n==1){
+      if (n == 1) {
         return next
       }
-      return g.bind(null, n-1, next, cur+next)
+      return g.bind(null, n - 1, next, cur + next)
     }
     // const a = g(6, 0, 1)
     // console.log(a,'aaa');
-    const aa = bengchuang(g(6000000,0,1))
-    console.log(aa,'aa==>>');
-    
+    const aa = bengchuang(g(6000000, 0, 1))
+    console.log(aa, 'aa==>>');
 
-    function h(n, cur=0, next=1){
-      if(n==0){
+
+    function h(n, cur = 0, next = 1) {
+      if (n == 0) {
         return n
       }
-      if(n == 1){
+      if (n == 1) {
         return next
       }
-      const c = cur+next
-      return h.bind(null, n-1, next, c)
+      const c = cur + next
+      return h.bind(null, n - 1, next, c)
     }
 
 
-    function gg(n){
-      if(n<2){
+    function gg(n) {
+      if (n < 2) {
         return n
       }
       var a = 0, b = 1, c
-      for(let i=1;i<n;i++){
-        c = a+b
+      for (let i = 1; i < n; i++) {
+        c = a + b
         a = b
         b = c
       }
       return c
     }
-    function bengchuang2(f){
+    function bengchuang2(f) {
       while (f && f instanceof Function) {
         f = f()
       }
@@ -124,7 +79,44 @@ console.log(transformListToTree(maps))
     console.log(bengchuang2(h(60000)));
 
 
-    
+
+
+
+
+
+
+    function fei(n, cur = 0, next = 1) {
+      if (n == 0) {
+        return n
+      }
+      if (n == 1) {
+        return cur
+      }
+      return fei.bind(n - 1, next, cur + next)
+    }
+
+    function t(f) {
+      while (f && f instanceof Function) {
+        f = f()
+      }
+      return f
+    }
+
+    const aaa = t(f(20))
+    const aaa2 = bbb(20)
+    console.log(aaa, 'aaa', aaa2);
+
+
+    function bbb(n) {
+      if (n < 2) return n
+      let a = 0, b = 1, c
+      for (let i = 1; i < n; i++) {
+        c = a + b
+        a = b
+        b = c
+      }
+      return c
+    }
 
 
 
@@ -132,4 +124,5 @@ console.log(transformListToTree(maps))
 
   </script>
 </body>
+
 </html>
