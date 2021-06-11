@@ -10,7 +10,54 @@
   
 
   <script>
-    
+    const maps = [
+  {
+    key: 'a1',
+    parent: 'root'
+  },
+  {
+    key: 'a2',
+    parent: 'a1'
+  },
+  {
+    key: 'a3',
+    parent: 'a1'
+  },
+  {
+    key: 'a4',
+    parent: 'a1'
+  },
+  {
+    key: 'a5',
+    parent: 'a3'
+  }
+]
+
+function TreeNode(value) {
+  this.value = value
+  this.children = []
+}
+
+function transformListToTree(maps) {
+  const root = new TreeNode('root')
+  const cacheMap = new Map()
+  cacheMap.set('root', root)
+  for (const m of maps) {
+    const { parent, key } = m
+    const newNode = new TreeNode(key)
+    if (cacheMap.has(parent)) {
+      const a = cacheMap.get(parent)
+      a.children.push(newNode)
+    } else {
+      root.children.push(newNode)
+    }
+    cacheMap.set(key, newNode)
+  }
+
+  return root
+}
+
+console.log(transformListToTree(maps))
     function bengchuang(f){
       while (f && f instanceof Function) {
         f = f()
