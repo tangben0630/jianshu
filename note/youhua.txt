@@ -235,6 +235,29 @@ SSR:
       7, if-Modified-Since <====> Last-Modified
       8, Etag  <====>   if-None-Match
 
+    
+    5, http缓存-2:
+
+      强制缓存 优先级高于 协商缓存
+
+      强制缓存:
+
+        对于强制缓存, header会用两个字段来表明 ---- Expires 和 Cache-Control
+            1, Expires: http 1.0 产物. 表示资源的到期时间, 
+            2, Cache-Control: 1.1 的产物, max-age = time 时间精确到秒
+
+      协商缓存: 
+
+        Last-Modified: 服务器在响应时, 告诉浏览器资源最后的修改时间
+
+        if-Modified-Since: 浏览器再次请求服务器的时候, 请求头会包含此字段, 后面跟着缓存中获得
+                            最后修改时间. 服务器接收到这个字段, 没过期返回 304 过期 200 并且返回资源
+        
+        Etag: 服务器响应请求时, 通过此字段告诉浏览器当前资源在服务器生成的唯一标识
+        if-None-Match: 请求时, 报文头部加入这个字段, 
+        
+
+
 
 
 
