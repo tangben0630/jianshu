@@ -151,6 +151,14 @@ SSR:
         DNS: 把域名转化成 IP
         baidu.com     ---> 一级域名
         www.baidu.com ---> 二级域名
+
+        1, 一般宽带服务商都会提供DNS服务器
+        2, 当一台设备连接到路由器后, 路由器给他分配一个ip地址, 并告诉他DNS服务器
+        3, Chrome 会获取系统的 DNS 服务器
+
+        1, 在浏览器发出请求之前, 计算机会拦截每个请求并在DNS数据库中查找域名地址, 
+        2, Dos攻击: 让重要的DNS服务器过载, 使得DNS查询不起作用
+        3, DNS劫持: 攻击者将查询重定向到其他域名服务器
         
 
     4, TCP
@@ -161,4 +169,43 @@ SSR:
     第二个阶段 5-6  请求与响应
 
     request 的时候在服务器端加上 gizped
+
+    5, http缓存:
+
+      1, Expires: 响应头, 代表该资源过期时间
+                  规定时间内, 拿缓存,过期重新请求
+
+      2, Cache-Control: 请求/响应头, 精确控制缓存策略
+
+                浏览器优先查找 Cache-Control, 优先以Cache-Control为准, 没有Cache-Control则以Expires为准
+
+
+      3, if-Modified-Since: 请求头, 资源最近修改时间, 由浏览器告诉服务器
+                            当文件过期时, 浏览器带上 if-Modified-Since 时间的值
+                            就是 上次浏览器返回的 Last-Modified 
+
+      4, Last-Modified: 响应头, 资源最近修改时间, 服务器告诉浏览器
+                        服务器每次返回文件时候, 告诉浏览器修改的时间, 以及缓存过期时间
+
+          3,4, : 服务器比较请求头里的 Last-Modified 时间和文件的上次修改时间
+                1, 如果一致, 可以使用本地缓存(304),.
+                2, 不一致, 服务器读取磁盘上的文件, 返回给浏览器同时告诉浏览器修改时间以及过期时间
+
+
+      5, Etag: 响应头, 资源标识, 服务器告诉浏览器
+
+              文件内容的唯一ID, 配合请求头 if-None-Match 
+              服务器优先比较 if-None-Match, 跟文件的 Etag值, 
+
+      6, if-None-Match: 请求头, 缓存资源标识, 浏览器告诉服务器
+
+      7, if-Modified-Since <====> Last-Modified
+      8, Etag  <====>   if-None-Match
+
+
+
+
+
+
+
     
