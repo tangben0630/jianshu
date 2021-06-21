@@ -82,9 +82,80 @@ Context: 通过组件树提供了一个传递数据的方法，从而避免了�
 
 2021-6-21
 
-  Fiber
+  Fiber架构:
 
+      纤程: 协程的一种实现, 更新可以中断, 更新, 可以有优先级的体现
 
+      FiberRootNode --> RootFiber --> App --> p --> ka --> num
+
+      Fiber: {
+
+        静态数据结构的属性:
+
+          tag: 节点类型,
+          key: key,
+          stateNode: 静态节点, 真实的dom节点
+
+        链接:
+
+          return: 指向父节点
+          child: 子节点
+          sibling: 兄弟节点
+
+        动态工作单元:
+
+          pengdingProps: 
+          memoizedProps:
+          updateQueue:
+          memoizedState:
+          dependencies: 依赖
+          mode:
+
+          effectTag:
+          nextEffect:
+
+          firstEffect:
+          lastEffect:
+
+        调度优先级:
+          lines:  expirationTime 被 lane 取代
+          childLanes:
+        
+        alternate: 该fiber在另一次更新时对应的 Fiber
+
+      }
+
+      工作原理: 
+          1, 每个节点都是一个fiber
+          2, 页面只有一个根fiber节点, 来管理fiber -----> FiberRootNode
+          3, 每个节点都会有自己的根节点 RootFiber, 一个页面可以有很多 RootFiber
+          4,  FiberRootNode: {
+                current: RootFiber
+              }
+          5,  RootFiber: {
+                stateNode: FiberRootNode
+              }
+
+          6,  alternate: 
+
+              1, 首次调用 reactDom.render() --> 会创建整个应用的根节点 FiberRootNode ,
+              2, 每次调用 reactDom.render() 都会创建当前应用的根节点 RootFiber, 
+              3, 每次更新, 都会创建 RootFiber 的alternate属性
+                  RootFiber {
+                    alternate: RootFiber
+                  }
+              4, 用 alternate 属性, 利用深度优先遍历, 创建整棵fiber树, 
+              5, 目前有两颗 fiber 树, 页面本身的 fiber树, 和 workingProgress fiber树 内存中构建
+              6, 当 workingProgress fiber 树完成了渲染, 此时, FiberRootNode 的指针就指向了
+                  workingProgress fiber 树的根节点, 于是 workingProgress fiber 树就变成了
+                  current fiber树, 变成了页面上的fiber树
+              7, 每次创建更新都会重新创建一次 workingProgress fiber 树, current fiber的节点称为
+                  current 节点, 此时, current.alternate 已经指向了一个 RootFiber, 
+                  所以再创建 workingProgress fiber时, 会基于这个 RootFiber
+              8,  这种将 current fiber 与 本次更新返回的jsx进行比较生成 workingProgress fiber
+                  diff算法
+
+          7, 首屏渲染跟更新的区别就是 是否有 diff 算法
 
 
 
